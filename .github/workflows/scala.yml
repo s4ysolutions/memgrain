@@ -20,7 +20,9 @@ jobs:
       env:
         DEPLOY_DESTINATION: ${{ secrets.DEPLOY_DESTINATION }}
         DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
+        set
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         echo 1 > 1.txt
