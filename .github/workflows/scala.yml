@@ -36,13 +36,11 @@ jobs:
         DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
-        pwd
-        ls -la
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         echo 1 > 1.txt
         chmod 600 ~/.ssh/id_rsa
-        scp -o StrictHostKeyChecking=no scala/edge-service-rest/target/universal/edge-service-rest-0.1.0-SNAPSHOT.tgz "$DEPLOY_DESTINATION"
+        scp -o StrictHostKeyChecking=no scala/edge-service/rest/target/universal/edge-service-rest-0.1.0-SNAPSHOT.tgz "$DEPLOY_DESTINATION"
         ssh -o StrictHostKeyChecking=no "$DEPLOY_HOST" "./memgrain.edge.rest.deploy.sh edge-service-rest-0.1.0-SNAPSHOT"
 #    - name: upload dependency graph
 #      uses: scalacenter/sbt-dependency-submission@ab086b50c947c9774b70f39fc7f6e20ca2706c91
