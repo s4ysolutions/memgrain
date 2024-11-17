@@ -26,7 +26,9 @@ jobs:
         distribution: 'temurin'
         cache: 'sbt'
     - name: build
-      run: sbt Universal/packageZipTarball
+      run: |
+        cd scala
+        sbt Universal/packageZipTarball
       # Optional: This step uploads information to the GitHub dependency graph and unblocking Dependabot alerts for the repository
     - name: deploy
       env:
