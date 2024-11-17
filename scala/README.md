@@ -2,7 +2,7 @@
 
 A ZIO-based backend application that serves a REST API and emulates communcation with microservices.
 
- - [x] live endpoint: http://prod2.s4y.solutions:8080/ping
+ - [x] live endpoint: http://prod2.s4y.solutions:8080/ping?payload=cargo
  - [x] Swagger OpenAPI endpoint: http://prod2.s4y.solutions:8080/docs/openapi
  - [x] [REST Edge microservice](edge-service) makes calls to others microservices
    - [x] [Server](edge-service/rest/src/main/scala/solutions/s4y/memgrain/edge/rest/EdgeRest.scala)
