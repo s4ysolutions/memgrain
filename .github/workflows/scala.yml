@@ -21,7 +21,7 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         echo 1 > 1.txt
         chmod 600 ~/.ssh/id_rsa
-        scp -o StrictHostKeyChecking=no "$DEPLOY_DESTINATION"
+        scp -o StrictHostKeyChecking=no 1.txt "$DEPLOY_DESTINATION"
         ssh -o StrictHostKeyChecking=no "$DEPLOY_HOST" "mv 1.txt 2.txt"
         
     - uses: actions/checkout@v4
