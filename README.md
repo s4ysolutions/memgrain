@@ -1,3 +1,3 @@
-#Memgrain
+# Memgrain
 
 [Scala backend prototype](scala)
