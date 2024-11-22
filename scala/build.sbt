@@ -2,13 +2,17 @@ import sbt.Keys.libraryDependencies
 
 import scala.collection.Seq
 
+val zioVersion = "2.1.13"
 
 lazy val commonSettings = Seq(
   scalaVersion := "3.5.2",
   organization := "solutions.s4y.memgrain",
   maintainer := "sergey@s4y.solutions",
+  version := "0.1.0-SNAPSHOT",
   libraryDependencies ++= Seq(
     "dev.zio" %% "zio" % "2.1.12",
+    "dev.zio" %% "zio" % zioVersion,
+    "dev.zio" %% "zio-test" % zioVersion % Test
   )
 )
 lazy val authCore = project
@@ -47,14 +51,23 @@ lazy val authClient = project
     commonSettings,
     name := "auth-service-client-inproc",
   ).dependsOn(authClientApi, authServer)
+
+/** ******************************************
+  * Edge service
+  * ******************************************
+  */
 lazy val edgeServiceRest = (project in file("edge-service/rest"))
   .enablePlugins(JavaAppPackaging)
   .settings(
     commonSettings,
     name := "edge-service-rest",
-    version := "0.1.0-SNAPSHOT",
     libraryDependencies ++= Seq(
       "dev.zio" %% "zio-http" % "3.0.1",
-    ),
-  ) .dependsOn(authClient)
+      "dev.zio" %% "zio-config" % "4.0.2",
+      "dev.zio" %% "zio-config-magnolia" % "4.0.2",
+      "dev.zio" %% "zio-config-typesafe" % "4.0.2",
+      "dev.zio" %% "zio-config-refined" % "4.0.2"
+    )
+  )
+  .dependsOn(authClient)
 
