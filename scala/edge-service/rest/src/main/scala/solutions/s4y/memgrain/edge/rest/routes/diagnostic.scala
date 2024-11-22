@@ -21,6 +21,6 @@ def diagnosticRoutes(prefix: String, version: String): Routes[Any, Response] = {
   val routes =
     epPing.implement(diagPingHandler).toRoutes
         ++ epVersion.implement(diagVersionHandler(version)).toRoutes
-      ++ SwaggerUI.routes("docs" / "openapi" / prefix, openAPI)
+      ++ SwaggerUI.routes("docs" / "openapi", openAPI)
   routes
 }

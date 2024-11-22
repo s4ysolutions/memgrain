@@ -28,8 +28,8 @@ The system is composed of several microservices:
 
 
 ## Deliverables
- - [x] live endpoint: http://prod2.s4y.solutions:8080/ping
- - [x] Swagger OpenAPI endpoint: http://prod2.s4y.solutions:8080/docs/openapi
+ - [x] live endpoint: http://prod2.s4y.solutions:8081/diag/ping
+ - [x] Swagger OpenAPI endpoint: http://prod2.s4y.solutions:8081/docs/openapi
 
 ## Work breakdown
  - [x] [REST Edge microservice](edge-service) makes calls to others microservices
