@@ -1,17 +1,17 @@
-package solutions.s4y.memgrain.edge.rest.config
+package solutions.s4y.memgrain.edge.rest
 
-import zio.Config
+import zio.{Config, Layer, TaskLayer, ZIO, ZLayer}
 import zio.config.*
 import zio.config.magnolia.deriveConfig
 import zio.schema.annotation.description
 
 @description("Configuration for the edge rest service")
-case class EdgeRestConfig(
+case class ServiceConfig(
     @description("The port the edge rest service will be listening on")
     port: Int,
 )
 
-object EdgeRestConfig {
-  implicit val configDescriptor: Config[EdgeRestConfig] =
-    deriveConfig[EdgeRestConfig].nested("edge-rest")
+object ServiceConfig {
+  implicit val configDescriptor: Config[ServiceConfig] =
+    deriveConfig[ServiceConfig].nested("edge-rest")
 }
