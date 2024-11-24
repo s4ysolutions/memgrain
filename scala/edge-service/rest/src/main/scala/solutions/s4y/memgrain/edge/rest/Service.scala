@@ -1,6 +1,8 @@
 package solutions.s4y.memgrain.edge.rest
 
-import solutions.s4y.memgrain.edge.rest.hadlers.DiagnosticHandlersDefault
+import solutions.s4y.memgrain.auth.dummy.AuthStatusProviderDummy
+import solutions.s4y.memgrain.auth.{AuthServiceLive, AuthTokenFactoryLive}
+import solutions.s4y.memgrain.edge.rest.handlers.{AuthHandlersLive, DiagnosticHandlersLive}
 import zio.*
 import zio.config.typesafe.TypesafeConfigProvider
 import zio.http.Server
@@ -25,5 +27,11 @@ object EdgeRestService extends ZIOAppDefault {
     } yield server
 
   def run: ZIO[Any, Throwable, Unit] =
-    server.provide(DiagnosticHandlersDefault.layer, RoutesBuilderLive.layer)
+    server.provide(
+      AuthStatusProviderDummy.layer,
+      AuthServiceLive.layer,
+      AuthTokenFactoryLive.layer,
+      DiagnosticHandlersLive.layer,
+      AuthHandlersLive.layer,
+      RoutesBuilderLive.layer)
 }

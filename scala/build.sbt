@@ -25,41 +25,34 @@ lazy val authCore = project
     commonSettings,
     name := "auth-service-core"
   )
-lazy val authServerApi = project
-  .in(file("auth-service/server/api"))
+lazy val authServer = project
+  .in(file("auth-service/server"))
   .settings(
     commonSettings,
-    name := "auth-service-server-api"
+    name := "auth-service"
   )
   .dependsOn(authCore)
-lazy val authServer = project
-  .in(file("auth-service/server/default"))
-  .settings(
-    commonSettings,
-    name := "auth-service-server-default"
-  )
-  .dependsOn(authServerApi)
-lazy val authServerStatusProvider = project
+lazy val authServerProviderDummy = project
   .in(file("auth-service/server/providers/dummy"))
   .settings(
     commonSettings,
-    name := "auth-service-status-provider"
+    name := "auth-service-provider-dummy"
   )
   .dependsOn(authServer)
-lazy val authClientApi = project
-  .in(file("auth-service/client/api"))
+lazy val authClient = project
+  .in(file("auth-service/client"))
   .settings(
     commonSettings,
-    name := "auth-service-client-api"
+    name := "auth-client"
   )
   .dependsOn(authCore)
-lazy val authClient = project
+lazy val authClientInproc = project
   .in(file("auth-service/client/inproc"))
   .settings(
     commonSettings,
-    name := "auth-service-client-inproc"
+    name := "auth-client-inproc"
   )
-  .dependsOn(authClientApi, authServer)
+  .dependsOn(authClient, authCore, authServer, authServerProviderDummy)
 
 /** ******************************************
   * Edge service
@@ -80,7 +73,7 @@ lazy val edgeServiceRest = (project in file("edge-service/rest"))
       "dev.zio" %% "zio-config-refined" % "4.0.2"
     )
   )
-  .dependsOn(authClient)
+  .dependsOn(authClientInproc)
 
 /** ******************************************
   * Test app
